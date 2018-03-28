@@ -781,3 +781,11 @@ input.btn-group.black:checked + label {
     border-bottom-color: black;/* Цвет линии внизу */
 
 }
+
+.grid { 
+width: 100%; 
+background-color: #f3f3f3; 
+border-bottom-width: 2px; 
+border-bottom-style: solid; 
+border-bottom-color: black; 
+}

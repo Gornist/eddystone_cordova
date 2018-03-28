@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Wed Mar 28 16:44:17 KRAT 2018
+#Wed Mar 28 17:24:53 KRAT 2018
 122.file=C\:\\Users\\User\\Documents\\GitHub\\eddystone_cordova\\platforms\\android\\app\\build\\intermediates\\assets\\debug\\www\\plugins\\cordova-plugin-file\\www\\Entry.js
 60.set=ANDROID_RESOURCE
 52.set=ASSET
