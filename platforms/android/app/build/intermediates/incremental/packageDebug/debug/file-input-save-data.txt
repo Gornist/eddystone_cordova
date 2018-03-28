@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Wed Mar 28 23:00:05 KRAT 2018
+#Thu Mar 29 04:58:44 KRAT 2018
 122.file=C\:\\Users\\User\\Documents\\GitHub\\eddystone_cordova\\platforms\\android\\app\\build\\intermediates\\assets\\debug\\www\\fonts\\ProximaNova-Black-webfont.svg
 60.set=ASSET
 52.set=ASSET

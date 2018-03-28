@@ -22,18 +22,6 @@ body {
 	font-size: 7.5vw;
 }
 
-/* Add a top margin to the content corresponding to the height of the header. */
-body::before,
-section::before {
-	display: block;
-	width: 100%;
-	height: 1.1em; /* Should correspond to header's height. */
-	margin-bottom: 0.4em;
-	content: '\0000a0'; /* Non-breaking space (&nbsp;) */
-	font-size: 180%; /* Same as the header's font size. */
-	line-height: 200%; /* Slighly more than the header's line-height. */
-}
-
 /* Add a bottom margin. */
 body::after,
 section::after {

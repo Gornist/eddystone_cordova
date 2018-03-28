@@ -7,12 +7,52 @@ var app = (function()
 	var beacons = {};
 
 	var hitpoints = 100;
+	var maxhitpoints = 100;
+	var minhitpoints = 0;
 	var suitpoints = 100;
+	var maxsuitpoints = 100;
+	var minsuitpoints = 0;
 	var radpoints = 0;
+	var maxradpoints = 100;
+	var minradpoints = 0;
 	var psipoints = 0;
+	var maxpsipoints = 100;
+	var minpsipoints = 0;
 
 	function displayStats()
 	{
+		if (hitpoints < minhitpoints)
+		{
+			hitpoints == 0;
+		}
+		else if (hitpoints > maxhitpoints)
+		{
+			suitpoints == 100;
+		}
+		else if (suitpoints < minsuitpoints)
+		{
+			suitpoints == 0;
+		}
+		else if (suitpoints > maxsuitpoints)
+		{
+			suitpoints == 100;
+		}
+		else if (psipoints > maxpsipoints)
+		{
+			psipoints == 100;
+		}
+		else if (psipoints < minpsipoints)
+		{
+			psipoints == 0;
+		}
+		else if (radpoints > maxradpoints)
+		{
+			radpoints == 100;
+		}
+		else if (radpoints < minradpoints)
+		{
+			radpoints == 0;
+		}
 		document.getElementById("radBeacons").innerHTML = "Rad "+radpoints; 
 		document.getElementById("psiBeacons").innerHTML = "Psi "+psipoints; 
 		document.getElementById("hitBeacons").innerHTML = "Hit "+hitpoints; 
@@ -28,6 +68,8 @@ var app = (function()
 			'deviceready',
 			function() { evothings.scriptsLoaded(onDeviceReady) },
 			false);
+			bottomButtonListener();
+			displayStats();
 	};
 
 	function onDeviceReady()
@@ -136,6 +178,7 @@ var app = (function()
 
 				$('#message').remove();
 				$('#found-beacons').append(element);
+			
 				if (beacon.name == "RADIATION" && beacon.rssi > -74)
 			{
 				radpoints++;
@@ -151,6 +194,36 @@ var app = (function()
 			}
 			displayStats()
 		});
+	}
+function bottomButtonListener()
+{
+	document.getElementById("hitHeal").addEventListener("click", function() {
+		heal(0);
+	});
+	document.getElementById("radHeal").addEventListener("click", function() {
+		heal(1);
+	});
+	document.getElementById("psiHeal").addEventListener("click", function() {
+		heal(2);
+	});
+}
+	
+
+	function heal(n)
+	{
+		if (n == 0)
+		{
+			hitpoints = maxhitpoints;
+		}
+		else if (n == 1)
+		{
+			radpoints = minradpoints;
+		}
+		else if (n == 2)
+		{
+			psipoints = minpsipoints;
+		}
+		displayStats()
 	}
 
 	function htmlBeaconAccuracy(beacon)
