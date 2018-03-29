@@ -23,35 +23,35 @@ var app = (function()
 	{
 		if (hitpoints < minhitpoints)
 		{
-			hitpoints == 0;
+			hitpoints = minhitpoints;
 		}
 		else if (hitpoints > maxhitpoints)
 		{
-			suitpoints == 100;
+			suitpoints = maxhitpoints;
 		}
 		else if (suitpoints < minsuitpoints)
 		{
-			suitpoints == 0;
+			suitpoints = minsuitpoints;
 		}
 		else if (suitpoints > maxsuitpoints)
 		{
-			suitpoints == 100;
+			suitpoints = maxsuitpoints;
 		}
 		else if (psipoints > maxpsipoints)
 		{
-			psipoints == 100;
+			psipoints = maxpsipoints;
 		}
 		else if (psipoints < minpsipoints)
 		{
-			psipoints == 0;
+			psipoints = minpsipoints;
 		}
 		else if (radpoints > maxradpoints)
 		{
-			radpoints == 100;
+			radpoints = maxradpoints;
 		}
 		else if (radpoints < minradpoints)
 		{
-			radpoints == 0;
+			radpoints = minradpoints;
 		}
 		document.getElementById("radBeacons").innerHTML = "Rad "+radpoints; 
 		document.getElementById("psiBeacons").innerHTML = "Psi "+psipoints; 
