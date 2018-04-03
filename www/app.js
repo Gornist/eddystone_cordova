@@ -21,44 +21,56 @@ var app = (function()
 
 	function displayStats()
 	{
-		if (hitpoints < minhitpoints)
-		{
-			hitpoints = minhitpoints;
-		}
-		else if (hitpoints > maxhitpoints)
-		{
-			suitpoints = maxhitpoints;
-		}
-		else if (suitpoints < minsuitpoints)
-		{
-			suitpoints = minsuitpoints;
-		}
-		else if (suitpoints > maxsuitpoints)
-		{
-			suitpoints = maxsuitpoints;
-		}
-		else if (psipoints > maxpsipoints)
-		{
-			psipoints = maxpsipoints;
-		}
-		else if (psipoints < minpsipoints)
-		{
-			psipoints = minpsipoints;
-		}
-		else if (radpoints > maxradpoints)
-		{
-			radpoints = maxradpoints;
-		}
-		else if (radpoints < minradpoints)
-		{
-			radpoints = minradpoints;
-		}
 		document.getElementById("radBeacons").innerHTML = "Rad "+radpoints; 
 		document.getElementById("psiBeacons").innerHTML = "Psi "+psipoints; 
 		document.getElementById("hitBeacons").innerHTML = "Hit "+hitpoints; 
 		document.getElementById("suitBeacons").innerHTML = "Suit "+suitpoints;
 	}
 
+	function checkStats()
+	{
+
+		if (hitpoints > maxhitpoints)
+		{
+			hitpoints = maxhitpoints;
+		}
+
+		if (hitpoints < minhitpoints)
+		{
+			hitpoints = minhitpoints;
+		}
+
+		if (psipoints > maxpsipoints)
+		{
+			psipoints = maxpsipoints;
+		}
+
+		if (psipoints < minpsipoints)
+		{
+			psipoints = minpsipoints;
+		}
+
+		if (radpoints > maxradpoints)
+		{
+			radpoints = maxradpoints;
+		}
+
+		if (radpoints < minradpoints)
+		{
+			radpoints = minradpoints;
+		}
+
+		if (suitpoints > maxsuitpoints)
+		{
+			suitpoints = maxsuitpoints;
+		}
+
+		if (suitpoints < minsuitpoints)
+		{
+			suitpoints = minsuitpoints;
+		}
+		displayStats()
+	}
 
 	// Timer that displays list of beacons.
 	var updateTimer = null;
@@ -75,13 +87,13 @@ var app = (function()
 	function onDeviceReady()
 	{
 		// Start tracking beacons!
-		setTimeout(startScan, 500);
+		setTimeout(startScan, 1000);
 		console.log(navigator.notification);
 		console.log(navigator.vibrate);
 		console.log(Media);
 		console.log(device.cordova);
 		// Display refresh timer.
-		updateTimer = setInterval(displayBeaconList, 500);
+		updateTimer = setInterval(displayBeaconList, 1000);
 	}
 
 	function playAudio(src) {
@@ -192,6 +204,7 @@ var app = (function()
 				navigator.vibrate(150);
 			}
 			}
+			checkStats()
 			displayStats()
 		});
 	}
