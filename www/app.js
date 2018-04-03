@@ -18,6 +18,7 @@ var app = (function()
 	var psipoints = 0;
 	var maxpsipoints = 100;
 	var minpsipoints = 0;
+	var rad_coeff = 0;
 
 	function displayStats()
 	{
@@ -70,6 +71,56 @@ var app = (function()
 			suitpoints = minsuitpoints;
 		}
 		displayStats()
+	}
+
+	function radCoeff()
+	{
+		if (radpoints >= 0 && radpoints <= 9)
+		{
+			rad_coeff = 0;
+		}
+		else if (radpoints >= 10 && radpoints <= 19)
+		{
+			rad_coeff = 0.01;
+		}
+		else if (radpoints >= 20 && radpoints <= 29)
+		{
+			rad_coeff = 0.02;
+		}
+		else if (radpoints >= 30 && radpoints <= 39)
+		{
+			rad_coeff = 0.04;
+		}
+		else if (radpoints >= 40 && radpoints <= 49)
+		{
+			rad_coeff = 0.04;
+		}
+		else if (radpoints >= 50 && radpoints <= 59)
+		{
+			rad_coeff = 0.05;
+		}
+		else if (radpoints >= 60 && radpoints <= 69)
+		{
+			rad_coeff = 0.0625;
+		}
+		else if (radpoints >= 70 && radpoints <= 79)
+		{
+			rad_coeff = 0.0714;
+		}
+		else if (radpoints >= 80 && radpoints <= 89)
+		{
+			rad_coeff = 0.0833;
+		}
+		else if (radpoints >= 90 && radpoints <= 100)
+		{
+			rad_coeff = 0.1;
+		}
+		return rad_coeff;
+	}
+
+	function doRadDamage()
+	{
+		hitpoints = hitpoints - radCoeff();
 	}
 
 	// Timer that displays list of beacons.
@@ -197,15 +248,15 @@ var app = (function()
 				navigator.vibrate(150);
 				playAudio("audio/geiger_7.mp3");
 			}
-			else if (beacon.name == "ARTIFACT" && beacon.rssi > -90)
+			if (beacon.name == "ARTIFACT" && beacon.rssi > -90)
 			{
 				psipoints++;
 				playAudio("audio/contact_1.mp3");
 				navigator.vibrate(150);
 			}
 			}
-			checkStats()
-			displayStats()
+			doRadDamage();
+			checkStats();
 		});
 	}
 function bottomButtonListener()
