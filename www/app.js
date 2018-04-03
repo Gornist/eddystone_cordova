@@ -32,24 +32,24 @@ var app = (function()
 	}
 
 
-function log(options) {
-        var logger = $('#logger');
-        if (!logger.length) {
-            $('body').append($('<div id="logger"></div>'));
-            logger = $('#logger');
-        }
-        Object.keys(options).forEach(function(opt) {
-            var log = $('.log').attr('data-id', opt);
-            console.log(log);
-            var html = $('<div class="log" data-id="'+opt+'">'+opt+': '+ (options[opt])+'</div>');
-            if (!log.length) {
-                logger.append(html);
-            }
-            else {
-                log.last().after(html);
-            }
-        });
-    }
+//function log(options) {
+//        var logger = $('#logger');
+//        if (!logger.length) {
+//            $('body').append($('<div id="logger"></div>'));
+//            logger = $('#logger');
+//        }
+//        Object.keys(options).forEach(function(opt) {
+//            var log = $('.log').attr('data-id', opt);
+//            console.log(log);
+//            var html = $('<div class="log" data-id="'+opt+'">'+opt+': '+ (options[opt])+'</div>');
+//            if (!log.length) {
+//                logger.append(html);
+//            }
+//            else {
+//                log.last().after(html);
+//            }
+//        });
+//    }
 
 	function checkStats()
 	{
@@ -292,7 +292,6 @@ checkStats();
 				navigator.vibrate(150);
 			}
 			}
-
 		});
 	}
 function bottomButtonListener()
