@@ -1,3 +1,6 @@
+// npm i -g http-server
+// cd www && http-server
+
 var app = (function()
 {
 	// Application object.
@@ -28,9 +31,28 @@ var app = (function()
 		document.getElementById("suitBeacons").innerHTML = "Suit "+suitpoints;
 	}
 
+
+function log(options) {
+        var logger = $('#logger');
+        if (!logger.length) {
+            $('body').append($('<div id="logger"></div>'));
+            logger = $('#logger');
+        }
+        Object.keys(options).forEach(function(opt) {
+            var log = $('.log').attr('data-id', opt);
+            console.log(log);
+            var html = $('<div class="log" data-id="'+opt+'">'+opt+': '+ (options[opt])+'</div>');
+            if (!log.length) {
+                logger.append(html);
+            }
+            else {
+                log.last().after(html);
+            }
+        });
+    }
+
 	function checkStats()
 	{
-
 		if (hitpoints > maxhitpoints)
 		{
 			hitpoints = maxhitpoints;
@@ -74,57 +96,64 @@ var app = (function()
 	}
 
 	function radCoeff()
-	{
-		if (radpoints >= 0 && radpoints <= 9)
-		{
-			rad_coeff = 0;
-		}
-		else if (radpoints >= 10 && radpoints <= 19)
-		{
-			rad_coeff = 0.01;
-		}
-		else if (radpoints >= 20 && radpoints <= 29)
-		{
-			rad_coeff = 0.02;
-		}
-		else if (radpoints >= 30 && radpoints <= 39)
-		{
-			rad_coeff = 0.04;
-		}
-		else if (radpoints >= 40 && radpoints <= 49)
-		{
-			rad_coeff = 0.04;
-		}
-		else if (radpoints >= 50 && radpoints <= 59)
-		{
-			rad_coeff = 0.05;
-		}
-		else if (radpoints >= 60 && radpoints <= 69)
-		{
-			rad_coeff = 0.0625;
-		}
-		else if (radpoints >= 70 && radpoints <= 79)
-		{
-			rad_coeff = 0.0714;
-		}
-		else if (radpoints >= 80 && radpoints <= 89)
-		{
-			rad_coeff = 0.0833;
-		}
-		else if (radpoints >= 90 && radpoints <= 100)
-		{
-			rad_coeff = 0.1;
-		}
-		return rad_coeff;
-	}
+    {
+       
+        if (radpoints >= 0 && radpoints <= 9)
+        {
+            log({rads: '0-9'});
+            rad_coeff = 0;
+        }
+        else if (radpoints >= 10 && radpoints <= 19)
+        {
+           log({rads: '10-19'});
+            rad_coeff = 0.01;
+        }
+        else if (radpoints >= 20 && radpoints <= 29)
+        {
+           log({rads: '20-29'});
+            rad_coeff = 0.02;
+        }
+        else if (radpoints >= 30 && radpoints <= 39)
+        {
+           log({rads: '30-39'});
+            rad_coeff = 0.04;
+        }
+        else if (radpoints >= 40 && radpoints <= 49)
+        {
+            rad_coeff = 0.04;
+        }
+        else if (radpoints >= 50 && radpoints <= 59)
+        {
+            rad_coeff = 0.05;
+        }
+        else if (radpoints >= 60 && radpoints <= 69)
+        {
+            rad_coeff = 0.0625;
+        }
+        else if (radpoints >= 70 && radpoints <= 79)
+        {
+            rad_coeff = 0.0714;
+        }
+        else if (radpoints >= 80 && radpoints <= 89)
+        {
+            rad_coeff = 0.0833;
+        }
+        else if (radpoints >= 90 && radpoints <= 100)
+        {
+            rad_coeff = 0.1;
+        }
+        return rad_coeff;
+    }
 
 	function doRadDamage()
 	{
-		hitpoints = hitpoints - radCoeff();
+		log({radCoeff: radCoeff(), hitpoints: hitpoints});
+		hitpoints = +((hitpoints - radCoeff()).toFixed(4));
+
 	}
 
 	// Timer that displays list of beacons.
-	var updateTimer = null;
+	//var updateTimer = null;
 	app.initialize = function()
 	{
 		document.addEventListener(
@@ -144,7 +173,15 @@ var app = (function()
 		console.log(Media);
 		console.log(device.cordova);
 		// Display refresh timer.
-		updateTimer = setInterval(displayBeaconList, 1000);
+	//	updateTimer = setInterval(displayBeaconList, 1000);
+		xyz = setInterval(update, 1000);
+	}
+
+	function update()
+	{
+displayBeaconList();
+doRadDamage();
+checkStats();
 	}
 
 	function playAudio(src) {
@@ -255,8 +292,7 @@ var app = (function()
 				navigator.vibrate(150);
 			}
 			}
-			doRadDamage();
-			checkStats();
+
 		});
 	}
 function bottomButtonListener()
@@ -383,4 +419,3 @@ function bottomButtonListener()
 })();
 
 app.initialize();
-
